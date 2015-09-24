@@ -1,0 +1,295 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+            http://maven.apache.org/POM/4.0.0
+            http://maven.apache.org/xsd/maven-4.0.0.xsd
+         ">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>nz.co.aetheric.parent</groupId>
+		<artifactId>maven-parent-global</artifactId>
+		<version>1.1.0</version>
+	</parent>
+
+	<groupId>nz.co.aetheric</groupId>
+	<artifactId>psycho</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<name>Psycho</name>
+	<url>https://github.com/tzrlk/psycho.git</url>
+
+	<!-- Turn these into a github tile. -->
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/tzrlk/psycho/issues</url>
+	</issueManagement>
+	<scm>
+		<url>https://github.com/tzrlk/psycho/issues</url>
+		<connection>scm:git:https://github.com/tzrlk/psycho.git</connection>
+		<developerConnection>scm:git:git@github.com/tzrlk/psycho.git</developerConnection>
+	</scm>
+
+	<properties>
+		<version.scala>2.11.6</version.scala>
+		<version.scoverage>1.1.1</version.scoverage>
+		<version.maven>3.3.3</version.maven>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>${version.scala}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.scalatest</groupId>
+			<artifactId>scalatest_2.11</artifactId>
+			<version>2.2.5</version>
+			<scope>test</scope>
+			<exclusions>
+
+				<exclusion>
+					<groupId>or.scala-lang</groupId>
+					<artifactId>scala-library</artifactId>
+				</exclusion>
+
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.12</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<sourceDirectory>src/main/scala</sourceDirectory>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<executions>
+
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+
+			<!-- Scala lang should be a tile. -->
+			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>scala-maven-plugin</artifactId>
+				<version>3.2.2</version>
+				<executions>
+
+					<execution>
+						<id>scala-compile-first</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>add-source</goal>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>scala-test-compile</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.scalatest</groupId>
+				<artifactId>scalatest-maven-plugin</artifactId>
+				<version>1.0</version>
+				<configuration>
+					<reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+					<junitxml>.</junitxml>
+					<filereports>WDF TestSuite.txt</filereports>
+				</configuration>
+				<executions>
+
+					<execution>
+						<id>test</id>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.scoverage</groupId>
+				<artifactId>scoverage-maven-plugin</artifactId>
+				<version>${version.scoverage}</version>
+				<configuration>
+					<scalaVersion>${version.scala}</scalaVersion>
+				</configuration>
+				<executions>
+
+					<execution>
+						<id>coverage-instrument-start</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>pre-compile</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>coverage-instrument-end</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>post-compile</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>coverage-check</id>
+						<phase>test</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<minimumCoverage>80</minimumCoverage>
+							<failOnMinimumCoverage>true</failOnMinimumCoverage>
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>io.repaint.maven</groupId>
+				<artifactId>tiles-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<!--<tiles>
+						<tile>nz.co.aetheric:maven-tile-core:[1,2)</tile>
+						<tile>nz.co.aetheric:maven-tile-scala:[1,2)</tile>
+						<tile>nz.co.aetheric:maven-tile-mojo:[1,2)</tile>
+						<tile>nz.co.aetheric:maven-tile-github:[1,2)</tile>
+						<tile>nz.co.aetheric:maven-tile-test:[1,2)</tile>
+					</tiles>-->
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<version>0.12</version>
+				<configuration>
+					<message>Updated documentation for ${project.version}.</message>
+					<server>github</server>
+				</configuration>
+				<executions>
+
+					<execution>
+						<phase>site</phase>
+						<goals>
+							<goal>site</goal>
+						</goals>
+					</execution>
+
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<reporting>
+		<plugins>
+
+			<plugin>
+				<groupId>org.scoverage</groupId>
+				<artifactId>scoverage-maven-plugin</artifactId>
+				<version>${version.scoverage}</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report-only</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+		</plugins>
+	</reporting>
+
+	<profiles>
+
+		<profile>
+			<id>travis</id>
+
+			<activation>
+				<property>
+					<name>TRAVIS</name>
+					<value>true</value>
+				</property>
+			</activation>
+
+			<build>
+				<plugins>
+
+					<plugin>
+						<groupId>org.eluder.coveralls</groupId>
+						<artifactId>coveralls-maven-plugin</artifactId>
+						<version>4.0.0</version>
+						<configuration>
+							<sourceDirectories>
+								<sourceDirectory>src/main/scala</sourceDirectory>
+							</sourceDirectories>
+						</configuration>
+						<executions>
+
+							<execution>
+								<phase>post-site</phase>
+								<goals>
+									<goal>report</goal>
+								</goals>
+							</execution>
+
+						</executions>
+					</plugin>
+
+				</plugins>
+			</build>
+
+		</profile>
+
+	</profiles>
+
+</project>
