@@ -1,0 +1,5 @@
+Psycho
+======
+
+image:https://travis-ci.org/tzrlk/psycho.svg?branch=master["Build Status", link="https://travis-ci.org/tzrlk/psycho"]
+image:https://coveralls.io/repos/tzrlk/psycho/badge.svg?branch=master&service=github["Coverage Status", link="https://coveralls.io/github/tzrlk/psycho?branch=master"]
