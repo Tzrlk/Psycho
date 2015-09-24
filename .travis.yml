@@ -1,0 +1,51 @@
+language: java
+jdk: oraclejdk7
+sudo: false
+
+branches:
+  except:
+    - travis
+    - gh-pages
+
+env:
+  global:
+    - MAVEN_VERSION=3.2.5
+    - MAVEN_NAME=apache-maven-${MAVEN_VERSION}
+    - MAVEN_ARCHIVE=${MAVEN_NAME}-bin.tar.gz
+    - MAVEN=${MAVEN_NAME}/bin/mvn
+    - secure: "SZAh7MecPEFdhg/BrpJhxqNVk+pGaenZm4HY9At8RDFoEXDby4egcP0xw+MoX85Kd1s9kzUlvoTjQ+q2SjSoKL7H/ggfmtAa9gkwukdHJV4wlLE0tRuy+j/CkiqRBOn2VnFka/ifzbWRQOK/yvtsbnmDpuyKbXfl4YW+Xxk41yEeqNruJYyAZHxmRexY1X3FV00NoNK++aRtvj6gsXTohl3dN3qP9hgZYLYCo75e5nhgnuIGSWURx8Ud+MDsCOqNr0BCqQd7QjHV4V5dr9RV7NiUOKP2sANi0IqfoIdwcJ71QWM0eAENWRknTxCiKVUnx3odUNjshY3q47dSQWd9BOynvTm1rTaborAoZttR3YxjREnQcUWSvMRBbd0Ya8kcqB+Sa2d5zXWxI6rjHYzThnFTdRcVrKCKMb+1rT4JQWCFbgvdvGTteMfWK0CId/uJwV6lReR3/4/Z8P2lTMYQNp3OknUTxCYjf2meStDaIcl+GdgNSZU+YhLQ6IkHACzd7LHp919CDmgNCcymGOetHOJCQgURR2SLQPJms9QCtP2I8QGI9M3zKb3qjQUf8DPYdcxnXnHMFMr8CqsWTRNoF9d75KWPoSwIJ59C2uMxLVkHOGz6BDJvgdTfqFJzXbsvWRmp3XZPa0dc/0zsSavitkuxiEiA4kV+XAzlDpmd4+M="
+    - secure: "uZQt3ndpJVxMbZQwAG0tXaEz8B3WjvulGLlI6L//CjCQomcoao3sSqprhfRBEcAmQ6iDc2yAWRvmGxpvSX1aWiBZywhvjXfLnoLBwfJtZ2N42ttJwumF0QEyfBdzi01NZFQuAdoBpdm5yl32/LqKg7iMuxlv8Xm7nxFWW3D0Acv5aDWZ5dPuF2vz1GGAIxuBvkHvgctWtWaP3TUDHr/p3PyzjTIwE3DQIgRciCdbf+R6h4O2ZboMh8HEO7fghNdqR7axXGC5MzeOeK3Y3iSIl7lPO6bGqplyM4kXkiH4+AtcqDmu+2UoImyIFwf/yHMmRUkLijvnLl35/T75+tq6lES8rPbAWxXj0So3rUJ+eoqSIyCJic3eZ6DQ/g/Dx7/8VlPNJhi4P4qqSf5qgBBl3uqyhHtZmjnEfWF+sElndoXAUAFiDrNjtvWtEPsXhAGvQ6BC80IRSQ7ipvIt1zP1nOgtFWFfAgU1ELh2lt4aDz+IvuCgJ8xKSGRuw5dwr5p5RmQFADYkuHEUhW7LLzUNCFY3GclyauRZ+1tOzzTYA/4d74s5K8mqjbvcX/d3m9u+vbf80+0XxHzXfxZt25QitbpH6P2a7WxSnF4ou61yJGqzP9tbfzH/u6Q/fH1xRbxeJH3EKNfz0vF8j6BXhSBiqjpbRWN8ZnlhlorUYE2KNIc="
+    - secure: "epeRziVhgwrubcrsoK70HStEEIAMJ3N3my/X9ahj4njRMDgP468YTzx4ecO+LZIV9V5LCqB8xgMzO6ePOMALixMdXNn2v+pFpDhvozHgedvNQhZK9c0bvhYFIqe1SH/SHVysbPeGpi3Q4k30rYzsL9QfbZOhnuwqIbzuPQpHdGpkM0Ksu1UiOoD3uHi+w95bfoJxACKbfBJtHjsCOpdYwipdXjaajZy6138viJk1PParTNF0QZN06Q42lDnKiLYhg1GWrQo+OTKSBwbaK7643IA6w4Z2Yr+AmYqJhjZJsnkdHpSBLy+7K6vY9RGr8i3Hb5V0UUJTMKedBugkzRflthzbmYdk9ecYXjNfKNrrPQStjncqXw1KVZlrC9noOBAOlujj9wIp/cEwW1X1mu5Z/lh4lxypwB4l5cH5j5H3f+XLSPFsgy3RRl24OoTC6duHo61K8Of0RUxHRGh7KivStv7yeFM4kDfsbW067WgdFCtgybLumJ9wLQTp5llGeQJvR+OwDhH28/5ccLf6Igtk8FBSWmWp7TDXc8u2Gi6yE7PD2ijEhp+uhCbzX7ZZngnlcSbmG+niED6qW1oN+i0i2b+1g7kKg654q/pXtgZK60WvfT+1aP6LhFsYPfgnstY+kCseQz5Lc9JSg2LD5hN6O/QRCmHQxkA7RxbnHlZg/WE="
+    - secure: "RIp85Kit2DfqyZBsUYHQtupbNWE4u65FnRv4pJlROMUjBGRLFgZVuySB39GULoLvFut1E6yhtbgl04o9ZQcE8gaGpnKFBW+6WzX0aVEYUyglFx9/OH84lZwyTZmEu07D9HOeG8cmwyouIcsc8TbjyRhRr7hzWAU4x1i/YirrJC+DuqOFHxpyc+70pGK+J9I/DbKxpiMo6G19p7lDAeqam+QUH41wHClFb4xPm10srYN6Izsjx2d4KNSA/d0jaPjG7pc5ZoaBuz0Cp80dvQPenpplduOhpfUdQcI6ST+O46p7H7ngWjxmdeyvYpjCd61oFjZW+8CMDcxqTEZ8lkprvrLBR/maAgUFCjSOffo/A1Y2yHhdplO56zwrTnQ+2ZtgltUuUFMzTNOao4nTEGqns01melfR4s8WynFloIlpQcqYIabsyP6vu9489TXixqCLa5FlOBQoeWlPCslzDr5cm1IJQFM/t6gnzCENyIRdjKLWGWDsPNbWuP8Y+//SjfJedScVL7z2y39w5oxNCkj9chFGzYFsBwYUhNsgUdVysAj/P50/wwIFRcWNR5Oj6jIqSnOsNqFG4C70nsvWtBd5gNx04sd27mz4VK9VvpIWQrxL4bRcgsRvjBGRRf31wZFuCpATu5ok9mZ41yZLObso85ju/wrKAXz0tDwMN0WrurI="
+
+cache:
+  directories:
+    - $HOME/.m2/repository
+
+before_install:
+  - git clone -b travis `git config --get remote.origin.url` target/travis
+
+install:
+  - wget http://apache.arvixe.com/maven/maven-3/${MAVEN_VERSION}/binaries/${MAVEN_ARCHIVE}
+  - tar -xzf ${MAVEN_ARCHIVE}
+  - ${MAVEN} --version
+
+script:
+  - ${MAVEN} install --settings target/travis/settings.xml
+
+after_success:
+  - ${MAVEN} site --settings target/travis/settings.xml
+
+deploy:
+  provider: releases
+  api_key:
+    secure: 0AtccOM1HQCk9BT94JO7HH08SJLVBtx5RysR+qILacSrg7ylKuRM//9sIC8GDdt6tCzkfYV0MV25AiIytLe3FHCLBjJQ78kStdh0slZOqfgr5AbjKhPo/H3Zu0BAGPcStQAgftQZ4siWE/OxOXHm1ScoKBQ46d8wItlimtDqIYQ/Su0dnETnicyUbEA6fX30eYguejvOS3J40IGI52HTMam+tst9CA5WCZbEw5JV879YA89R7uUetGcKefCY0H4IYcRKopeJeOuSuAPZz4YCgNum2hsbTfAhSb8pkaEIdMucUf1T7sxkyyb8qUMZ/ZYG/G7Jfdl4r0C0g3kSYiUXmByDtWU4WwNciWb/cWzjG7XrqHh4oLrGuL04vKMbgGwTgFicOuRhHX3Hi2tvuya++ZlAttVnsohwjfCk4dsj0pvH4obDAck1wWX9ioJ5ltuJMMioz33lt1r/0yiaIKcORpc/6S3fjg6Kg05lokz0eBHxUbICJeWcycWVuBzwnlMuQTW3Pg6iD3ukBP4AGsC5fex8y5438vZXuLcbKXENWcxCw2odLBHjRk2QflodfqLON5y6TiuJQZ7IlJTfCwmVyDzZpzNi49jix0FmO7nWzjI0ulmCIOXBDYKL1RFdwzy5KCjb85n6fOynDTbMXKtWelHFOVkBI0MflEXyIEut3cA=
+  file:
+    - "maven-plugin-slam-*.jar"
+    - "maven-plugin-slam-*.pom"
+  skip_cleanup: true
+  on:
+    tags: true
+
+after_deploy:
+  - ${MAVEN} deploy --settings target/travis/settings.xml
